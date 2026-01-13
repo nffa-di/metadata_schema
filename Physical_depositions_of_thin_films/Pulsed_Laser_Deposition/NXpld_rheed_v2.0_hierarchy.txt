@@ -1,0 +1,47 @@
+NXpld_rheed (group)
+│   ├── substrate (NXsample)
+│   │   ├── name [NX_CHAR]
+│   │   ├── chemical_formula [NX_CHAR]
+│   │   ├── orientation [NX_CHAR]
+│   │   ├── miscut_angle [NX_FLOAT, degrees]
+│   │   ├── miscut_direction [NX_CHAR]
+│   │   ├── thickness [NX_FLOAT, mm]
+│   │   ├── dimensions [NX_FLOAT, mm]
+│   │   ├── surface_treatment [NX_CHAR]
+│   │   ├── manufacturer [NX_CHAR]
+│   │   ├── batch_id [NX_CHAR]
+│   ├── rheed_data (NXdata)
+│   │   ├── time [NX_FLOAT, s]
+│   │   ├── intensity_1 [NX_FLOAT]
+│   │   ├── intensity_2 [NX_FLOAT]
+│   │   ├── intensity_3 [NX_FLOAT]
+│   │   ├── diffraction_image [NX_UINT8]
+│   ├── multilayer (NXcollection)
+│   │   ├── layer_1 (NXprocess)
+│   │   │   ├── target (NXsample)
+│   │   │   │   ├── name [NX_CHAR]
+│   │   │   │   ├── chemical_formula [NX_CHAR]
+│   │   │   │   ├── description [NX_CHAR]
+│   │   │   │   ├── shape [NX_CHAR]
+│   │   │   │   ├── dimensions [NX_FLOAT]
+│   │   │   │   ├── thickness [NX_FLOAT, mm]
+│   │   │   │   ├── solid_form [NX_CHAR]
+│   │   │   │   ├── manufacturer [NX_CHAR]
+│   │   │   │   ├── batch_id [NX_CHAR]
+│   │   │   ├── start_time [NX_DATE_TIME]
+│   │   │   ├── end_time [NX_DATE_TIME]
+│   │   │   ├── operator [NX_CHAR]
+│   │   │   ├── description [NX_CHAR]
+│   │   │   ├── number_of_pulses [NX_INT]
+│   │   │   ├── deposition_time [NX_FLOAT, s]
+│   │   │   ├── temperature [NX_FLOAT, K]
+│   │   │   ├── heating_method [NX_CHAR]
+│   │   │   ├── post_annealing (NXcollection)
+│   │   │   │   ├── ambient_gas [NX_CHAR]
+│   │   │   │   ├── pressure [NX_FLOAT, Pa]
+│   │   │   │   ├── temperature [NX_FLOAT, K]
+│   │   │   │   ├── duration [NX_FLOAT, s]
+│   ├── instruments_used (NXcollection)
+│   │   ├── laser_system [NX_CHAR]
+│   │   ├── deposition_chamber [NX_CHAR]
+│   │   ├── rheed_system [NX_CHAR]
