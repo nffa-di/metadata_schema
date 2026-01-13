@@ -1,0 +1,191 @@
+@name: pld_fabrication
+@type: group
+@extends: NXentry
+@version: '1.0'
+@category: application
+@schema_version: '2025.1'
+children:
+  - @name: sample
+    @type: NXcollection
+    children:
+      - @name: substrate
+        @type: NXsample
+        children:
+          - @name: name
+            @type: NX_CHAR
+          - @name: chemical_formula
+            @type: NX_CHAR
+          - @name: orientation
+            @type: NX_CHAR
+          - @name: miscut_angle
+            @type: NX_FLOAT
+            @units: degrees
+          - @name: miscut_direction
+            @type: NX_CHAR
+          - @name: thickness
+            @type: NX_FLOAT
+            @units: mm
+          - @name: dimensions
+            @type: NX_FLOAT[2]
+            @units: mm|inches
+            @doc: >
+              Two-element array. If specified as (X, 0), the object is circular with diameter X.
+              If specified as (X, Y), the object is rectangular with width X and height Y.
+          - @name: position
+            @type: NX_FLOAT[5]
+            @units: mm,mm,mm,degrees,degrees
+            @doc: >
+              Substrate mounting position in the chamber: [X, Y, Z, tilt, azimuth].
+          - @name: surface_treatment
+            @type: NX_CHAR
+          - @name: manufacturer
+            @type: NX_CHAR
+          - @name: batch_id
+            @type: NX_CHAR
+      - @name: multilayer
+        @type: NXcollection
+        children:
+          - @name: layer_N
+            @type: NXprocess
+            @doc: |
+              Replace 'N' with the actual layer number (e.g., layer_1, layer_2, etc.) when creating entries.
+            children:
+              - @name: target
+                @type: NXsample
+                children:
+                  - @name: name
+                    @type: NX_CHAR
+                  - @name: chemical_formula
+                    @type: NX_CHAR
+                  - @name: description
+                    @type: NX_CHAR
+                  - @name: shape
+                    @type: NX_CHAR
+                  - @name: dimensions
+                    @type: NX_FLOAT[2]
+                    @units: mm|inches
+                    @doc: >
+                      Two-element array. If specified as (X, 0), the object is circular with diameter X.
+                      If specified as (X, Y), the object is rectangular with width X and height Y.
+                  - @name: thickness
+                    @type: NX_FLOAT
+                    @units: mm
+                  - @name: solid_form
+                    @type: NX_CHAR
+                  - @name: manufacturer
+                    @type: NX_CHAR
+                  - @name: batch_id
+                    @type: NX_CHAR
+              - @name: start_time
+                @type: NX_DATE_TIME
+              - @name: end_time
+                @type: NX_DATE_TIME
+              - @name: operator
+                @type: NX_CHAR
+              - @name: description
+                @type: NX_CHAR
+              - @name: number_of_pulses
+                @type: NX_INT
+              - @name: deposition_time
+                @type: NX_FLOAT
+                @units: s
+              - @name: temperature
+                @type: NX_FLOAT
+                @units: K
+              - @name: heating_method
+                @type: NX_CHAR
+              - @name: layer_thickness
+                @type: NX_FLOAT
+                @units: nm|u.c.
+              - @name: buffer_gas
+                @type: NX_CHAR
+              - @name: process_pressure
+                @type: NX_FLOAT
+                @units: Pa|mbar|Torr
+              - @name: heater_target_distance
+                @type: NX_FLOAT
+                @units: mm
+              - @name: repetition_rate
+                @type: NX_FLOAT
+                @units: Hz
+              - @name: laser_fluence
+                @type: NX_FLOAT
+                @units: J/(s.cm²)
+              - @name: laser_spot_area
+                @type: NX_FLOAT
+                @units: mm²
+                @doc: Area of the laser spot on the target surface.
+              - @name: laser_energy
+                @type: NX_FLOAT
+                @units: mJ
+                @doc: Energy per laser pulse delivered during ablation.
+              - @name: laser_rastering
+                @type: NXcollection
+                children:
+                  - @name: positions
+                    @type: NX_FLOAT[3]
+                    @units: mm
+                    @doc: >
+                      Laser rastering positions: [Lower position, Origin, Upper position] in millimeters.
+                      Used to define the spatial range and reference of the laser motion.
+                  - @name: velocities
+                    @type: NX_FLOAT[2]
+                    @units: mm/s
+                    @doc: >
+                      Minimum and maximum scan velocities for laser rastering: [min_velocity, max_velocity].
+                  - @name: coefficients
+                    @type: NX_FLOAT[2]
+                    @units: ''
+                    @doc: >
+                      Rastering motion coefficients: [lower coefficient, upper coefficient]. Unitless.
+              - @name: pre_annealing
+                @type: NXcollection
+                children:
+                  - @name: ambient_gas
+                    @type: NX_CHAR
+                  - @name: pressure
+                    @type: NX_FLOAT
+                    @units: Pa|mbar|Torr
+                  - @name: temperature
+                    @type: NX_FLOAT
+                    @units: K
+                  - @name: duration
+                    @type: NX_FLOAT
+                    @units: s
+              - @name: post_annealing
+                @type: NXcollection
+                children:
+                  - @name: ambient_gas
+                    @type: NX_CHAR
+                  - @name: pressure
+                    @type: NX_FLOAT
+                    @units: Pa|mbar|Torr
+                  - @name: temperature
+                    @type: NX_FLOAT
+                    @units: K
+                  - @name: duration
+                    @type: NX_FLOAT
+                    @units: s
+  - @name: rheed_data
+    @type: NXdata
+    children:
+      - @name: time
+        @type: NX_FLOAT
+        @units: s
+      - @name: intensity_1
+        @type: NX_FLOAT
+      - @name: intensity_2
+        @type: NX_FLOAT
+      - @name: intensity_3
+        @type: NX_FLOAT
+      - @name: diffraction_image
+        @type: NX_UINT8
+  - @name: instruments_used
+    @type: NXcollection
+    children:
+      - @name: laser_system
+        @type: NX_CHAR
+      - @name: deposition_chamber
+        @type: NX_CHAR
+      - @name: rheed_system
+        @type: NX_CHAR

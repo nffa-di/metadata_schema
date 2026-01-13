@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1"
+            name="pld_fabrication"
+            type="group"
+            category="application"
+            version="1.0"
+            schema_version="2025.1"
+            extends="NXentry">
+  <doc>PLD experiment schema including substrate, multilayer growth, and RHEED monitoring.</doc>
+
+  <group name="sample" type="NXcollection">
+    <group name="substrate" type="NXsample">
+      <field name="name" type="NX_CHAR"/>
+      <field name="chemical_formula" type="NX_CHAR"/>
+      <field name="orientation" type="NX_CHAR"/>
+      <field name="miscut_angle" type="NX_FLOAT" units="degrees"/>
+      <field name="miscut_direction" type="NX_CHAR"/>
+      <field name="thickness" type="NX_FLOAT" units="mm"/>
+      <field name="dimensions" type="NX_FLOAT[2]" units="mm|inches">
+        <doc>
+          Two-element array. If specified as (X, 0), the object is circular with diameter X.
+          If specified as (X, Y), the object is rectangular with width X and height Y.
+        </doc>
+      </field>
+      <field name="position" type="NX_FLOAT[5]" units="mm,mm,mm,degrees,degrees">
+        <doc>
+          Substrate mounting position in the chamber: [X, Y, Z, tilt, azimuth].
+        </doc>
+      </field>
+      <field name="surface_treatment" type="NX_CHAR"/>
+      <field name="manufacturer" type="NX_CHAR"/>
+      <field name="batch_id" type="NX_CHAR"/>
+    </group>
+
+    <group name="multilayer" type="NXcollection">
+      <group name="layer_N" type="NXprocess">
+        <doc>Replace 'N' with the actual layer number (e.g., layer_1, layer_2, etc.) when creating entries.</doc>
+        <group name="target" type="NXsample">
+          <field name="name" type="NX_CHAR"/>
+          <field name="chemical_formula" type="NX_CHAR"/>
+          <field name="description" type="NX_CHAR"/>
+          <field name="shape" type="NX_CHAR"/>
+          <field name="dimensions" type="NX_FLOAT[2]" units="mm|inches">
+            <doc>
+              Two-element array. If specified as (X, 0), the object is circular with diameter X.
+              If specified as (X, Y), the object is rectangular with width X and height Y.
+            </doc>
+          </field>
+          <field name="thickness" type="NX_FLOAT" units="mm"/>
+          <field name="solid_form" type="NX_CHAR"/>
+          <field name="manufacturer" type="NX_CHAR"/>
+          <field name="batch_id" type="NX_CHAR"/>
+        </group>
+
+        <field name="start_time" type="NX_DATE_TIME"/>
+        <field name="end_time" type="NX_DATE_TIME"/>
+        <field name="operator" type="NX_CHAR"/>
+        <field name="description" type="NX_CHAR"/>
+        <field name="number_of_pulses" type="NX_INT"/>
+        <field name="deposition_time" type="NX_FLOAT" units="s"/>
+        <field name="temperature" type="NX_FLOAT" units="K"/>
+        <field name="heating_method" type="NX_CHAR"/>
+        <field name="layer_thickness" type="NX_FLOAT" units="nm|u.c."/>
+        <field name="buffer_gas" type="NX_CHAR"/>
+        <field name="process_pressure" type="NX_FLOAT" units="Pa|mbar|Torr"/>
+        <field name="heater_target_distance" type="NX_FLOAT" units="mm"/>
+        <field name="repetition_rate" type="NX_FLOAT" units="Hz"/>
+        <field name="laser_fluence" type="NX_FLOAT" units="J/(s.cm²)"/>
+        <field name="laser_spot_area" type="NX_FLOAT" units="mm²">
+          <doc>Area of the laser spot on the target surface.</doc>
+        </field>
+        <field name="laser_energy" type="NX_FLOAT" units="mJ">
+          <doc>Energy per laser pulse delivered during ablation.</doc>
+        </field>
+
+        <group name="laser_rastering" type="NXcollection">
+          <field name="positions" type="NX_FLOAT[3]" units="mm">
+            <doc>
+              Laser rastering positions: [Lower position, Origin, Upper position] in millimeters.
+              Used to define the spatial range and reference of the laser motion.
+            </doc>
+          </field>
+          <field name="velocities" type="NX_FLOAT[2]" units="mm/s">
+            <doc>
+              Minimum and maximum scan velocities for laser rastering: [min_velocity, max_velocity].
+            </doc>
+          </field>
+          <field name="coefficients" type="NX_FLOAT[2]" units="">
+            <doc>
+              Rastering motion coefficients: [lower coefficient, upper coefficient]. Unitless.
+            </doc>
+          </field>
+        </group>
+
+        <group name="pre_annealing" type="NXcollection">
+          <field name="ambient_gas" type="NX_CHAR"/>
+          <field name="pressure" type="NX_FLOAT" units="Pa|mbar|Torr"/>
+          <field name="temperature" type="NX_FLOAT" units="K"/>
+          <field name="duration" type="NX_FLOAT" units="s"/>
+        </group>
+
+        <group name="post_annealing" type="NXcollection">
+          <field name="ambient_gas" type="NX_CHAR"/>
+          <field name="pressure" type="NX_FLOAT" units="Pa|mbar|Torr"/>
+          <field name="temperature" type="NX_FLOAT" units="K"/>
+          <field name="duration" type="NX_FLOAT" units="s"/>
+        </group>
+      </group>
+    </group>
+  </group>
+
+  <group name="rheed_data" type="NXdata">
+    <field name="time" type="NX_FLOAT" units="s"/>
+    <field name="intensity_1" type="NX_FLOAT"/>
+    <field name="intensity_2" type="NX_FLOAT"/>
+    <field name="intensity_3" type="NX_FLOAT"/>
+    <field name="diffraction_image" type="NX_UINT8"/>
+  </group>
+
+  <group name="instruments_used" type="NXcollection">
+    <field name="laser_system" type="NX_CHAR"/>
+    <field name="deposition_chamber" type="NX_CHAR"/>
+    <field name="rheed_system" type="NX_CHAR"/>
+  </group>
+</definition>
